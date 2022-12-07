@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="uz.digital.wallpaperapp.fragments.HomeFragment"
+        android:label="@string/home"/>
+    <fragment
+        android:id="@+id/likedFragment"
+        android:name="uz.digital.wallpaperapp.fragments.LikedFragment"
+        android:label="@string/like"
+        tools:layout="@layout/fragment_liked" />
+    <fragment
+        android:id="@+id/popularFragment"
+        android:name="uz.digital.wallpaperapp.fragments.PopularFragment"
+        android:label="@string/pop"
+        tools:layout="@layout/fragment_popular" />
+    <fragment
+        android:id="@+id/randomFragment"
+        android:name="uz.digital.wallpaperapp.fragments.RandomFragment"
+        android:label="@string/random"
+        tools:layout="@layout/fragment_random" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="uz.digital.wallpaperapp.fragments.HistoryFragment"
+        android:label="@string/history"
+        tools:layout="@layout/fragment_history" />
+
+    <action
+        android:id="@+id/action_home_to_history"
+        app:destination="@id/historyFragment"/>
+
+</navigation>
