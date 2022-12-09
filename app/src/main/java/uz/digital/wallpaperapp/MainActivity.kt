@@ -2,10 +2,13 @@ package uz.digital.wallpaperapp
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -36,6 +39,13 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
         binding.appBarMain.contentMain.bottomNav.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, id, _ ->
+            when(id.id) {
+                R.id.historyFragment -> hideBottomNav()
+                else -> showBottomNav()
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -63,8 +73,18 @@ class MainActivity : AppCompatActivity() {
         alertDialog.show()
     }
     fun history(item: MenuItem) {
-        val navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main)
-        navController.navigateUp()
-        navController.navigate(R.id.historyFragment)
+        findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.global_action)
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
+    }
+    private fun hideBottomNav() {
+        binding.appBarMain.contentMain.bottomNav.isVisible = false
+    }
+    private fun showBottomNav() {
+        binding.appBarMain.contentMain.bottomNav.isVisible = true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.serach_menu, menu)
+        return true
     }
 }
